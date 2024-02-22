@@ -1,0 +1,7 @@
+style = "blue"
+format_markdown = true
+
+margin = 100
+whitespace_in_kwargs = true
+remove_extra_newlines = false
+pipe_to_function_call = false
