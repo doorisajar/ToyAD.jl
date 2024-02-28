@@ -39,6 +39,16 @@ function Base.:*(x::Real, y::DualNumber)
 end
 
 
+function Base.:^(x::DualNumber, y::Real)
+    dual_power = if y != 0
+        DualNumber(x.value^y, y * x.value^(y-1) * x.derivative)
+    else
+        DualNumber(1., 0.)
+    end
+    return dual_power
+end
+
+
 function forward_diff(f::Function, x::Number)
 
     x_dual = DualNumber(x, 1.0)

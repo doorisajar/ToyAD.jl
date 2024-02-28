@@ -34,4 +34,22 @@ using Test
 
     @test forward_diff(add_mult_func, 5.0) == add_mult_func_prime(5.0)
 
+    pow_func(x) = x^3
+
+    pow_func_prime(x) = 3x^2
+    
+    @test forward_diff(pow_func, 5.) == pow_func_prime(5.)
+    
+    pow_add_mult_func(x) = 4x^3 + 2x^2
+    
+    pow_add_mult_func_prime(x) = 12x^2 + 4x
+    
+    @test forward_diff(pow_add_mult_func, 5.) == pow_add_mult_func_prime(5.)
+    
+    pow_zero_func(x) = 2 * x^0
+    
+    pow_zero_func_prime(x) = 0
+    
+    @test forward_diff(pow_zero_func, 5.) == pow_zero_func_prime(5.)
+    
 end
