@@ -11,6 +11,7 @@ end
 DualNumber(v::Int, d::AbstractFloat) = DualNumber(float(v), d)
 DualNumber(v::AbstractFloat, d::Int) = DualNumber(v, float(d))
 
+
 function Base.:+(x::DualNumber, y::DualNumber)
     return DualNumber(x.value + y.value, x.derivative + y.derivative)
 end
@@ -48,6 +49,20 @@ function Base.:^(x::DualNumber, y::Real)
         DualNumber(1., 0.)
     end
     return dual_power
+end
+
+
+function Base.:^(x::DualNumber, y::DualNumber)
+    # https://math.stackexchange.com/questions/1914591/dual-number-ab-varepsilon-raised-to-a-dual-power-e-g-ab-varepsilon
+    new_value = x.value^y.value
+    return DualNumber(new_value, new_value * (y.derivative * log(x.value) + (x.derivative * y.value) / x.value))
+end
+
+
+function Base.:^(x::Real, y::DualNumber)
+    # TODO double check this
+    new_value = x^y.value
+    return DualNumber(new_value, new_value * (y.derivative * log(x) + y.value / x))
 end
 
 
