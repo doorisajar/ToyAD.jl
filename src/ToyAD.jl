@@ -8,6 +8,8 @@ struct DualNumber{T<:Number}
     derivative::T
 end
 
+DualNumber(v::Int, d::AbstractFloat) = DualNumber(float(v), d)
+DualNumber(v::AbstractFloat, d::Int) = DualNumber(v, float(d))
 
 function Base.:+(x::DualNumber, y::DualNumber)
     return DualNumber(x.value + y.value, x.derivative + y.derivative)
