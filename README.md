@@ -1,8 +1,9 @@
 # ToyAD.jl
 
+![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg) [![build](https://github.com/doorisajar/ToyAD.jl/workflows/CI/badge.svg)](https://github.com/doorisajar/ToyAD.jl/actions?query=workflow%3ACI) [![codecov.io](http://codecov.io/github/doorisajar/ToyAD.jl/coverage.svg?branch=master)](http://codecov.io/github/doorisajar/ToyAD.jl?branch=master)
+
 Prototype implementation of automatic differentiation for learning purposes. Starting with forward mode, and (if time permits) moving on to reverse mode. 
 
-![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg) [![build](https://github.com/doorisajar/ToyAD.jl/workflows/CI/badge.svg)](https://github.com/doorisajar/ToyAD.jl/actions?query=workflow%3ACI) [![codecov.io](http://codecov.io/github/doorisajar/ToyAD.jl/coverage.svg?branch=master)](http://codecov.io/github/doorisajar/ToyAD.jl?branch=master)
 
 <!-- Tidyverse lifecycle badges, see https://www.tidyverse.org/lifecycle/ Uncomment or delete as needed. -->
 
