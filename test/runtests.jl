@@ -19,22 +19,37 @@ using Test
 
 @testset "Forward basics" begin
 
+    # TODO tests with Ints
     x = DualNumber(3.0, 1.0)
     y = DualNumber(4.0, 1.0)
 
     z = 2.5
+    
     
     # addition of duals
     @test x + y == DualNumber(7.0, 2.0)
 
     @test x + z == DualNumber(5.5, 1.0)
 
+    # subtraction
+    @test x - y == DualNumber(-1.0, 0.0)
+
+    @test x - z == DualNumber(0.5, 1.0)
+
+
     # correctness check for composition of + and * operators in forward_diff
     add_mult_func(x) = (3x + 2) * (2x + 1)
 
     add_mult_func_prime(x) = 3 * (2x + 1) + 2 * (3x + 2)
 
-    @test forward_diff(add_mult_func, 5.0) == add_mult_func_prime(5.0)
+    @test forward_diff(add_mult_func, 5.) == add_mult_func_prime(5.)
+
+    add_sub_func(x) = (3x - 2) * (2x + 1)
+
+    add_sub_func_prime(x) = 3 * (2x + 1) + 2 * (3x - 2)
+
+    @test forward_diff(add_sub_func, 5.) == add_sub_func_prime(5.)
+
 
     # powers (including zero) and composition thereof
     pow_func(x) = x^3

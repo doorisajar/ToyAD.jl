@@ -12,6 +12,7 @@ DualNumber(v::Int, d::AbstractFloat) = DualNumber(float(v), d)
 DualNumber(v::AbstractFloat, d::Int) = DualNumber(v, float(d))
 
 
+# addition
 function Base.:+(x::DualNumber, y::DualNumber)
     return DualNumber(x.value + y.value, x.derivative + y.derivative)
 end
@@ -27,6 +28,23 @@ function Base.:+(x::Real, y::DualNumber)
 end
 
 
+# subtraction
+function Base.:-(x::DualNumber, y::DualNumber)
+    return DualNumber(x.value - y.value, x.derivative - y.derivative)
+end
+
+
+function Base.:-(x::DualNumber, y::Real)
+    return DualNumber(x.value - y, x.derivative)
+end
+
+
+function Base.:-(x::Real, y::DualNumber)
+    return DualNumber(x - y.value, y.derivative)
+end
+
+
+# multiplication
 function Base.:*(x::DualNumber, y::DualNumber)
     return DualNumber(x.value * y.value, x.value * y.derivative + x.derivative * y.value)
 end
@@ -42,6 +60,7 @@ function Base.:*(x::Real, y::DualNumber)
 end
 
 
+# powers
 function Base.:^(x::DualNumber, y::Real)
     dual_power = if y != 0
         DualNumber(x.value^y, y * x.value^(y-1) * x.derivative)
@@ -66,6 +85,7 @@ function Base.:^(x::Real, y::DualNumber)
 end
 
 
+# forward mode differentiation
 function forward_diff(f::Function, x::Number)
 
     x_dual = DualNumber(x, 1.0)
