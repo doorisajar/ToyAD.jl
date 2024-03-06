@@ -23,9 +23,11 @@ using Test
     y = DualNumber(4.0, 1.0)
 
     z = 2.5
+    
+    # addition of duals
+    @test x + y == DualNumber(7.0, 2.0)
 
-    x + y
-    x + z
+    @test x + z == DualNumber(5.5, 1.0)
 
     # correctness check for composition of + and * operators in forward_diff
     add_mult_func(x) = (3x + 2) * (2x + 1)
@@ -34,6 +36,7 @@ using Test
 
     @test forward_diff(add_mult_func, 5.0) == add_mult_func_prime(5.0)
 
+    # powers (including zero) and composition thereof
     pow_func(x) = x^3
 
     pow_func_prime(x) = 3x^2
