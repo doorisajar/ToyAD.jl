@@ -11,7 +11,7 @@ Prototype implementation of automatic differentiation for learning purposes. Sta
 <!-- ![lifecycle](https://img.shields.io/badge/lifecycle-stable-green.svg) -->
 <!-- ![lifecycle](https://img.shields.io/badge/lifecycle-retired-orange.svg) -->
 <!-- ![lifecycle](https://img.shields.io/badge/lifecycle-archived-red.svg) -->
-<!-- ![lifecycle](https://img.shields.io/badge/lifecycle-dormant-blue.svg) --> -->
+<!-- ![lifecycle](https://img.shields.io/badge/lifecycle-dormant-blue.svg) -->
 
 
 <!-- travis-ci.com badge, uncomment or delete as needed, depending on whether you are using that service. -->
@@ -19,9 +19,6 @@ Prototype implementation of automatic differentiation for learning purposes. Sta
 <!-- Coverage badge on codecov.io, which is used by default. -->
 
 <!-- Documentation -- uncomment or delete as needed -->
-<!--
-[![Documentation](https://img.shields.io/badge/docs-stable-blue.svg)](https://doorisajar.github.io/ToyAD.jl/stable)
-[![Documentation](https://img.shields.io/badge/docs-main-blue.svg)](https://doorisajar.github.io/ToyAD.jl/dev)
--->
+<!-- [![Documentation](https://img.shields.io/badge/docs-stable-blue.svg)](https://doorisajar.github.io/ToyAD.jl/stable) -->
 <!-- Aqua badge, see test/runtests.jl -->
 <!-- [![Aqua QA](https://raw.githubusercontent.com/JuliaTesting/Aqua.jl/main/badge.svg)](https://github.com/JuliaTesting/Aqua.jl) -->
