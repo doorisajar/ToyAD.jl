@@ -1,6 +1,6 @@
 # ToyAD.jl
 
-![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg) [![build](https://github.com/doorisajar/ToyAD.jl/workflows/CI/badge.svg)](https://github.com/doorisajar/ToyAD.jl/actions?query=workflow%3ACI) [![codecov.io](http://codecov.io/github/doorisajar/ToyAD.jl/coverage.svg?branch=master)](http://codecov.io/github/doorisajar/ToyAD.jl?branch=master)
+![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg) [![build](https://github.com/doorisajar/ToyAD.jl/workflows/CI/badge.svg)](https://github.com/doorisajar/ToyAD.jl/actions?query=workflow%3ACI) [![codecov.io](http://codecov.io/github/doorisajar/ToyAD.jl/coverage.svg?branch=main)](http://codecov.io/github/doorisajar/ToyAD.jl?branch=main)
 
 Prototype implementation of automatic differentiation for learning purposes. Starting with forward mode, and (if time permits) moving on to reverse mode. 
 
@@ -15,13 +15,13 @@ Prototype implementation of automatic differentiation for learning purposes. Sta
 
 
 <!-- travis-ci.com badge, uncomment or delete as needed, depending on whether you are using that service. -->
-<!-- [![Build Status](https://travis-ci.com/doorisajar/ToyAD.jl.svg?branch=master)](https://travis-ci.com/doorisajar/ToyAD.jl) -->
+<!-- [![Build Status](https://travis-ci.com/doorisajar/ToyAD.jl.svg?branch=main)](https://travis-ci.com/doorisajar/ToyAD.jl) -->
 <!-- Coverage badge on codecov.io, which is used by default. -->
 
 <!-- Documentation -- uncomment or delete as needed -->
 <!--
 [![Documentation](https://img.shields.io/badge/docs-stable-blue.svg)](https://doorisajar.github.io/ToyAD.jl/stable)
-[![Documentation](https://img.shields.io/badge/docs-master-blue.svg)](https://doorisajar.github.io/ToyAD.jl/dev)
+[![Documentation](https://img.shields.io/badge/docs-main-blue.svg)](https://doorisajar.github.io/ToyAD.jl/dev)
 -->
 <!-- Aqua badge, see test/runtests.jl -->
-<!-- [![Aqua QA](https://raw.githubusercontent.com/JuliaTesting/Aqua.jl/master/badge.svg)](https://github.com/JuliaTesting/Aqua.jl) -->
+<!-- [![Aqua QA](https://raw.githubusercontent.com/JuliaTesting/Aqua.jl/main/badge.svg)](https://github.com/JuliaTesting/Aqua.jl) -->
