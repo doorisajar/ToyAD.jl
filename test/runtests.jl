@@ -1,5 +1,7 @@
 using ToyAD
 using Test
+using Zygote
+
 
 # write tests here
 
@@ -69,5 +71,13 @@ using Test
     pow_zero_func_prime(x) = 0
     
     @test forward_diff(pow_zero_func, 5.) == pow_zero_func_prime(5.)
+
+    two_exp(x) = 2^x
+    two_exp_prime(x) = 2^(x) * log(2)
+    @test forward_diff(two_exp, 4.2) == two_exp_prime(4.2) 
+
+    dual_to_real(x) = x^(3*x)
+    dual_to_real_prime(x) = 3 * x^(3*x) * (1 + log(x))
+    @test forward_diff(dual_to_real, 1.2) ≈ dual_to_real_prime(1.2) #Note: not precisely accurate due to floating point arithmetic
     
 end

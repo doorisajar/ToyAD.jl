@@ -81,7 +81,7 @@ end
 function Base.:^(x::Real, y::DualNumber)
     # TODO double check this
     new_value = x^y.value
-    return DualNumber(new_value, new_value * (y.derivative * log(x) + y.value / x))
+    return DualNumber(new_value, new_value * (y.derivative * log(x)))
 end
 
 
