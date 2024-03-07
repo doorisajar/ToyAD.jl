@@ -1,6 +1,5 @@
 using ToyAD
 using Test
-using Zygote
 
 
 # write tests here
@@ -26,8 +25,8 @@ using Zygote
     y = DualNumber(4.0, 1.0)
 
     z = 2.5
-    
-    
+
+
     # addition of duals
     @test x + y == DualNumber(7.0, 2.0)
 
@@ -44,40 +43,40 @@ using Zygote
 
     add_mult_func_prime(x) = 3 * (2x + 1) + 2 * (3x + 2)
 
-    @test forward_diff(add_mult_func, 5.) == add_mult_func_prime(5.)
+    @test forward_diff(add_mult_func, 5.0) == add_mult_func_prime(5.0)
 
     add_sub_func(x) = (3x - 2) * (2x + 1)
 
     add_sub_func_prime(x) = 3 * (2x + 1) + 2 * (3x - 2)
 
-    @test forward_diff(add_sub_func, 5.) == add_sub_func_prime(5.)
+    @test forward_diff(add_sub_func, 5.0) == add_sub_func_prime(5.0)
 
 
     # powers (including zero) and composition thereof
     pow_func(x) = x^3
 
     pow_func_prime(x) = 3x^2
-    
-    @test forward_diff(pow_func, 5.) == pow_func_prime(5.)
-    
+
+    @test forward_diff(pow_func, 5.0) == pow_func_prime(5.0)
+
     pow_add_mult_func(x) = 4x^3 + 2x^2
-    
+
     pow_add_mult_func_prime(x) = 12x^2 + 4x
-    
-    @test forward_diff(pow_add_mult_func, 5.) == pow_add_mult_func_prime(5.)
-    
+
+    @test forward_diff(pow_add_mult_func, 5.0) == pow_add_mult_func_prime(5.0)
+
     pow_zero_func(x) = 2 * x^0
-    
+
     pow_zero_func_prime(x) = 0
-    
-    @test forward_diff(pow_zero_func, 5.) == pow_zero_func_prime(5.)
+
+    @test forward_diff(pow_zero_func, 5.0) == pow_zero_func_prime(5.0)
 
     two_exp(x) = 2^x
     two_exp_prime(x) = 2^(x) * log(2)
-    @test forward_diff(two_exp, 4.2) == two_exp_prime(4.2) 
+    @test forward_diff(two_exp, 4.2) == two_exp_prime(4.2)
 
-    dual_to_real(x) = x^(3*x)
-    dual_to_real_prime(x) = 3 * x^(3*x) * (1 + log(x))
+    dual_to_real(x) = x^(3 * x)
+    dual_to_real_prime(x) = 3 * x^(3 * x) * (1 + log(x))
     @test forward_diff(dual_to_real, 1.2) ≈ dual_to_real_prime(1.2) #Note: not precisely accurate due to floating point arithmetic
-    
+
 end
