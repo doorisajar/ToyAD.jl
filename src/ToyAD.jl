@@ -63,9 +63,9 @@ end
 # powers
 function Base.:^(x::DualNumber, y::Real)
     dual_power = if y != 0
-        DualNumber(x.value^y, y * x.value^(y-1) * x.derivative)
+        DualNumber(x.value^y, y * x.value^(y - 1) * x.derivative)
     else
-        DualNumber(1., 0.)
+        DualNumber(1.0, 0.0)
     end
     return dual_power
 end
@@ -74,12 +74,13 @@ end
 function Base.:^(x::DualNumber, y::DualNumber)
     # https://math.stackexchange.com/questions/1914591/dual-number-ab-varepsilon-raised-to-a-dual-power-e-g-ab-varepsilon
     new_value = x.value^y.value
-    return DualNumber(new_value, new_value * (y.derivative * log(x.value) + (x.derivative * y.value) / x.value))
+    return DualNumber(
+        new_value, new_value * (y.derivative * log(x.value) + (x.derivative * y.value) / x.value)
+    )
 end
 
 
 function Base.:^(x::Real, y::DualNumber)
-    # TODO double check this
     new_value = x^y.value
     return DualNumber(new_value, new_value * (y.derivative * log(x)))
 end
