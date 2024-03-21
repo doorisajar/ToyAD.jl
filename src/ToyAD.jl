@@ -86,16 +86,58 @@ function Base.:^(x::Real, y::DualNumber)
 end
 
 
+function Base.sin(x::DualNumber)
+    return DualNumber(sin(x.value), cos(x.value) * x.derivative)
+end
+
+function Base.cos(x::DualNumber)
+    return DualNumber(cos(x.value), -sin(x.value) * x.derivative)
+end
+
+function Base.tan() end
+
+
 # forward mode differentiation
-function forward_diff(f::Function, x::Number)
+function forward_diff(f::Function, x::Real)
 
     x_dual = DualNumber(x, 1.0)
-
     y_dual = f(x_dual)
 
     return y_dual.derivative
 
 end
+
+
+function scalarize(f::Function, x::Array, i::Int)
+
+    new_x = convert(Vector{Any}, deepcopy(x))
+
+    new_f = function new_f(x_new)
+
+        new_x[i] = x_new
+        return f(new_x)
+
+    end
+
+    return new_f
+
+end
+
+
+function gradient(f::Function, x::Array{<:Real})
+
+    grads = zeros(length(x))
+
+    for i in eachindex(x)
+        f_i = scalarize(f, x, i)
+        grads[i] = forward_diff(f_i, x[i])
+    end
+
+    return grads
+
+end
+
+
 
 export DualNumber, forward_diff
 

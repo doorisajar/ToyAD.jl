@@ -27,22 +27,27 @@ powfunc(x) = x^3
 
 powfuncprime(x) = 3x^2
 
-forward_diff(expfunc, 5.) == powfuncprime(5.)
+forward_diff(expfunc, 5.0) == powfuncprime(5.0)
 
 powfancyfunc(x) = 4x^3 + 2x^2
 
 powfancyfuncprime(x) = 12x^2 + 4x
 
-forward_diff(powfancyfunc, 5.) == powfancyfuncprime(5.)
+forward_diff(powfancyfunc, 5.0) == powfancyfuncprime(5.0)
 
 powzerofunc(x) = 2 * x^0
 
 powzerofuncprime(x) = 0
 
-forward_diff(powzerofunc, 5.) == powzerofuncprime(5.)
+forward_diff(powzerofunc, 5.0) == powzerofuncprime(5.0)
 
 dualpowfunc(x) = x^DualNumber(2, 3)
 
 dualpowfunc(x)
 
 forward_diff(dualpowfunc, 5)
+
+# gradient
+vec_func(x) = sin(x[1]) + cos(x[2])
+
+multi_arg_func(x1, x2) = sin(x1) + cos(x2)

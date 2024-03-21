@@ -1,6 +1,6 @@
 using ToyAD
 using Test
-
+using Zygote
 
 # write tests here
 
@@ -78,5 +78,10 @@ using Test
     dual_to_real(x) = x^(3 * x)
     dual_to_real_prime(x) = 3 * x^(3 * x) * (1 + log(x))
     @test forward_diff(dual_to_real, 1.2) ≈ dual_to_real_prime(1.2) #Note: not precisely accurate due to floating point arithmetic
+
+    # gradient
+    vec_func(x) = sin(x[1]) + cos(x[2])
+
+    @test ToyAD.gradient(vec_func, [0.5, 1.0]) == only(Zygote.gradient(vec_func, [0.5, 1.0]))
 
 end
