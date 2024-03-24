@@ -1,8 +1,15 @@
 """
-Placeholder for a short summary about ToyAD.
+ToyAD is an in-development library for experimenting with the internals of automatic differentiation techniques by hand-coding them. 
 """
 module ToyAD
 
+"""
+    `DualNumber{T<:Number}`
+
+Dual number type for holding a scalar value and an associated derivative. 
+
+Currently supports `Float`s directly, and `Int`s by casting.
+"""
 struct DualNumber{T<:Number}
     value::T
     derivative::T
@@ -97,7 +104,11 @@ end
 function Base.tan() end
 
 
-# forward mode differentiation
+"""
+    `forward_diff(f::Function, x::Real)`
+
+Forward mode differentiation of `f(x)` where `x` is a scalar. Returns the scalar derivative.
+"""
 function forward_diff(f::Function, x::Real)
 
     x_dual = DualNumber(x, 1.0)
@@ -108,6 +119,13 @@ function forward_diff(f::Function, x::Real)
 end
 
 
+"""
+   `scalarize(f::Function, x::Array, i::Int)`
+
+Scalarize a function `f` that accepts an array input by fixing the input values of all but `x[i]`.
+
+Necessary for gradients.
+"""
 function scalarize(f::Function, x::Array, i::Int)
 
     new_x = convert(Vector{Any}, deepcopy(x))
@@ -124,6 +142,11 @@ function scalarize(f::Function, x::Array, i::Int)
 end
 
 
+"""
+    `gradient(f::Function, x::Array{<:Real})`
+
+Compute the gradient of a vector input, scalar output function `f` for a given input array `x`.
+"""
 function gradient(f::Function, x::Array{<:Real})
 
     grads = zeros(length(x))
@@ -139,7 +162,7 @@ end
 
 
 
-export DualNumber, forward_diff
+export DualNumber, forward_diff, gradient
 
 
 end # module
