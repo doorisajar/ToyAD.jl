@@ -84,4 +84,6 @@ using Zygote
 
     @test ToyAD.gradient(vec_func, [0.5, 1.0]) == only(Zygote.gradient(vec_func, [0.5, 1.0]))
 
+    # TODO tests for jacobian and jacobian_2
+
 end

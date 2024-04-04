@@ -162,6 +162,7 @@ end
 function jacobian(f::Function, x::Array{<:Real})
     output = f(x)
 
+    # TODO we need this to be a 2D array to which we add rows, or initialize it at the right size
     j = []
     for i in eachindex(output)
         f_i(y) = f(y)[i]
@@ -187,7 +188,7 @@ extract_derivative(::T) where {T} = zero(T)
 extract_derivative(x::DualNumber) = x.derivative
 
 
-export DualNumber, forward_diff, gradient, jacobian
+export DualNumber, forward_diff, gradient, jacobian, jacobian_2
 
 
 end # module
