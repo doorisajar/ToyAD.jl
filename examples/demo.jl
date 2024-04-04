@@ -33,7 +33,9 @@ powfancyfunc(x) = 4x^3 + 2x^2
 
 powfancyfuncprime(x) = 12x^2 + 4x
 
-vectoroutputfunc(x) = [12x[1]^2 + 4x[2], 4x[1]^3 + 2x[2]^2]
+function vectoroutputfunc(x)
+    return [12x[1]^2 + 4x[2], 4x[1]^3 + 2x[2]^2]
+end
 
 forward_diff(powfancyfunc, 5.0) == powfancyfuncprime(5.0)
 
@@ -54,4 +56,5 @@ vec_func(x) = sin(x[1]) + cos(x[2])
 
 multi_arg_func(x1, x2) = sin(x1) + cos(x2)
 
-ToyAD.jacobian(vectoroutputfunc, [2., 3.])
+ToyAD.jacobian(vectoroutputfunc, [2.0, 3.0, 4.0])
+ToyAD.jacobian_2(vectoroutputfunc, [2.0, 3.0, 4.0])

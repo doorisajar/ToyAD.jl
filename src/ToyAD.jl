@@ -113,8 +113,7 @@ function forward_diff(f::Function, x::Real)
 
     x_dual = DualNumber(x, 1.0)
     y_dual = f(x_dual)
-    Main.@infiltrate
-    return y_dual.derivative
+    return extract_derivative(y_dual)
 
 end
 
@@ -162,17 +161,30 @@ end
 
 function jacobian(f::Function, x::Array{<:Real})
     output = f(x)
-    
+
     j = []
     for i in eachindex(output)
         f_i(y) = f(y)[i]
-        #Main.@infiltrate
         gradient_i = gradient(f_i, x)
         append!(j, gradient_i)
     end
     return j
 end
 
+function jacobian_2(f::Function, x)
+    cols = mapreduce(hcat, eachindex(x)) do idx
+        new_x = convert(Vector{Any}, deepcopy(x))
+        new_x[idx] = DualNumber(x[idx], 1.0)
+        return extract_derivative.(f(new_x))
+    end
+
+    return cols
+end
+
+# ForwardDiff.jl does it like this: 
+#  https://github.com/JuliaDiff/ForwardDiff.jl/blob/42b1554493f04a7e3d2606f328e2a0e365bf8f69/src/derivative.jl#L85-L91
+extract_derivative(::T) where {T} = zero(T)
+extract_derivative(x::DualNumber) = x.derivative
 
 
 export DualNumber, forward_diff, gradient, jacobian
