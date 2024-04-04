@@ -172,10 +172,10 @@ function jacobian(f::Function, x::Array{<:Real})
     return j
 end
 
-function jacobian_2(f::Function, x)
+function jacobian_2(f::Function, x::AbstractVector{T}) where {T<:Real}
     cols = mapreduce(hcat, eachindex(x)) do idx
-        new_x = convert(Vector{Any}, deepcopy(x))
-        new_x[idx] = DualNumber(x[idx], 1.0)
+        new_x = convert(Vector{Union{T,DualNumber{T}}}, deepcopy(x))
+        new_x[idx] = DualNumber(x[idx], one(T))
         return extract_derivative.(f(new_x))
     end
 
