@@ -113,7 +113,7 @@ function forward_diff(f::Function, x::Real)
 
     x_dual = DualNumber(x, 1.0)
     y_dual = f(x_dual)
-
+    Main.@infiltrate
     return y_dual.derivative
 
 end
@@ -161,16 +161,21 @@ function gradient(f::Function, x::Array{<:Real})
 end
 
 function jacobian(f::Function, x::Array{<:Real})
-    j = Array{Float64}
-    for i in eachindex(x)
-        append!(j, gradient())
-
-    return j::Array{2, Float64}
+    output = f(x)
+    
+    j = []
+    for i in eachindex(output)
+        f_i(y) = f(y)[i]
+        #Main.@infiltrate
+        gradient_i = gradient(f_i, x)
+        append!(j, gradient_i)
+    end
+    return j
 end
 
 
 
-export DualNumber, forward_diff, gradient
+export DualNumber, forward_diff, gradient, jacobian
 
 
 end # module
