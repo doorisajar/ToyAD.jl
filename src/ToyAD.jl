@@ -160,6 +160,14 @@ function gradient(f::Function, x::Array{<:Real})
 
 end
 
+function jacobian(f::Function, x::Array{<:Real})
+    j = Array{Float64}
+    for i in eachindex(x)
+        append!(j, gradient())
+
+    return j::Array{2, Float64}
+end
+
 
 
 export DualNumber, forward_diff, gradient

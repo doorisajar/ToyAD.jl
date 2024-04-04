@@ -33,6 +33,8 @@ powfancyfunc(x) = 4x^3 + 2x^2
 
 powfancyfuncprime(x) = 12x^2 + 4x
 
+vector_output_func(x, y)
+
 forward_diff(powfancyfunc, 5.0) == powfancyfuncprime(5.0)
 
 powzerofunc(x) = 2 * x^0
