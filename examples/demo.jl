@@ -27,7 +27,7 @@ powfunc(x) = x^3
 
 powfuncprime(x) = 3x^2
 
-forward_diff(expfunc, 5.0) == powfuncprime(5.0)
+forward_diff(powfunc, 5.0) == powfuncprime(5.0)
 
 powfancyfunc(x) = 4x^3 + 2x^2
 
