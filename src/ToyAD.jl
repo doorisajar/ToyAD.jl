@@ -159,6 +159,7 @@ function gradient(f::Function, x::Array{<:Real})
 
 end
 
+# row-wise Jacobian
 function jacobian(f::Function, x::Array{<:Real})
     output = f(x)
 
@@ -172,6 +173,7 @@ function jacobian(f::Function, x::Array{<:Real})
     return j
 end
 
+# column-wise Jacobian
 function jacobian_2(f::Function, x::AbstractVector{T}) where {T<:Real}
     cols = mapreduce(hcat, eachindex(x)) do idx
         new_x = convert(Vector{Union{T,DualNumber{T}}}, deepcopy(x))
