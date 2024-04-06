@@ -7,7 +7,7 @@ Prototype implementation of automatic differentiation for learning purposes whil
 Currently working functionality is shown in the unit tests:
 - Forward mode differentiation for scalar-valued functions utilizing a subset of operators
 - Gradients for vector-valued functions
-- Jacobians coming soon!
+- Row-wise and columnar Jacobian calculations for vector to vector functions
 
 Built without LLM assistance; references linked where appropriate. 
 
