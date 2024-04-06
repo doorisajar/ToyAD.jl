@@ -54,7 +54,10 @@ forward_diff(dualpowfunc, 5)
 # gradient
 vec_func(x) = sin(x[1]) + cos(x[2])
 
-multi_arg_func(x1, x2) = sin(x1) + cos(x2)
+ToyAD.gradient(vec_func, [0.5, 1.5])
 
-ToyAD.jacobian(vectoroutputfunc, [2.0, 3.0, 4.0])
-ToyAD.jacobian_2(vectoroutputfunc, [2.0, 3.0, 4.0])
+# jacobian
+ToyAD.jacobian_tabular(vectoroutputfunc, [2.0, 3.0, 4.0])
+ToyAD.jacobian_columnar(vectoroutputfunc, [2.0, 3.0, 4.0])
+
+Zygote.jacobian(vectoroutputfunc, [2.0, 3.0, 4.0])

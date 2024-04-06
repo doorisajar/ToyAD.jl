@@ -159,22 +159,38 @@ function gradient(f::Function, x::Array{<:Real})
 
 end
 
-# row-wise Jacobian
-function jacobian(f::Function, x::Array{<:Real})
+
+"""
+    jacobian_tabular(f::Function, x::Array{<:Real})
+
+Row-wise Jacobian for vector input, vector output function `f` for a given input array `x`.
+"""
+function jacobian_tabular(f::Function, x::Array{<:Real})
+    # row-wise Jacobian with preallocation
     output = f(x)
 
-    # TODO we need this to be a 2D array to which we add rows, or initialize it at the right size
-    j = []
+    # could equivalently be done with mapreduce, performance change is minimal
+    j = zeros(Float64, (length(output), length(x)))
     for i in eachindex(output)
         f_i(y) = f(y)[i]
         gradient_i = gradient(f_i, x)
-        append!(j, gradient_i)
+        j[i, collect(eachindex(x))] = gradient_i
     end
+
     return j
 end
 
-# column-wise Jacobian
-function jacobian_2(f::Function, x::AbstractVector{T}) where {T<:Real}
+
+"""
+    jacobian_columnar(f::Function, x::Array{<:Real})
+
+Column-wise Jacobian for vector input, vector output function `f` for a given input array `x`. 
+
+For `f` with input dimension `n` and output dimension `m`, requires `m+1` fewer operations than `jacobian_tabular`. 
+(And much less memory.)
+"""
+function jacobian_columnar(f::Function, x::AbstractVector{T}) where {T<:Real}
+
     cols = mapreduce(hcat, eachindex(x)) do idx
         new_x = convert(Vector{Union{T,DualNumber{T}}}, deepcopy(x))
         new_x[idx] = DualNumber(x[idx], one(T))
@@ -190,7 +206,7 @@ extract_derivative(::T) where {T} = zero(T)
 extract_derivative(x::DualNumber) = x.derivative
 
 
-export DualNumber, forward_diff, gradient, jacobian, jacobian_2
+export DualNumber, forward_diff, gradient, jacobian_tabular, jacobian_columnar
 
 
 end # module

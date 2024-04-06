@@ -84,6 +84,22 @@ using Zygote
 
     @test ToyAD.gradient(vec_func, [0.5, 1.0]) == only(Zygote.gradient(vec_func, [0.5, 1.0]))
 
-    # TODO tests for jacobian and jacobian_2
+    # tabular and columnar jacobian
+    function vec_output(x)
+        return [12x[1]^2 + 4x[2], 4x[1]^3 + 2x[2]^2]
+    end
+    
+    @test ToyAD.jacobian_tabular(vec_output, [2.0, 3.0, 4.0]) == ToyAD.jacobian_columnar(vec_output, [2.0, 3.0, 4.0])
+
+    @test ToyAD.jacobian_tabular(vec_output, [2.0, 3.0, 4.0]) == only(Zygote.jacobian(vec_output, [2.0, 3.0, 4.0]))
+
+    # jacobians still work when some of the partials aren't DualNumbers
+    function vec_output(x)
+        return [12x[1]^2 + 4x[2] + sin(x[3]), 4x[1]^3 + 2x[2]^2]
+    end
+
+    @test ToyAD.jacobian_tabular(vec_output, [2.0, 3.0, 4.0]) == ToyAD.jacobian_columnar(vec_output, [2.0, 3.0, 4.0])
+
+    @test ToyAD.jacobian_tabular(vec_output, [2.0, 3.0, 4.0]) == only(Zygote.jacobian(vec_output, [2.0, 3.0, 4.0]))
 
 end
