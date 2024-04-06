@@ -172,6 +172,8 @@ function jacobian_tabular(f::Function, x::Array{<:Real})
     # could equivalently be done with mapreduce, performance change is minimal
     j = zeros(Float64, (length(output), length(x)))
     for i in eachindex(output)
+        # compute 1 row of gradients, as in the middle matrix representation here:
+        # https://en.wikipedia.org/wiki/Jacobian_matrix_and_determinant
         f_i(y) = f(y)[i]
         gradient_i = gradient(f_i, x)
         j[i, collect(eachindex(x))] = gradient_i
